@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="minus-btn-1" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="added-phone" type="text" class="form-control text-center" value="1">
+                           <button id="plus-btn-1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$<span id="totalMobilePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="minus-btn-2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="added-cover" type="text" class="form-control text-center" value="1">
+                           <button id="plus-btn-2" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id="totalCoverPrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,19 +64,87 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="sub-amount"> 1,278</span></h5>
+                        <h5>$<span id="tax">00</span></h5>
+                        <h5>$<span id="total-amount">1,278</span></h5>
                      </div>
                   </div>
                </div>
                <div class="col-md-12 pt-4 pb-4">
-                  <button type="button" class="btn btn-success check-out">Check Out</button>
+                  <button id="check-btn" type="button" class="btn btn-success check-out">Check Out</button>
                </div>
             </div>
          </div>
       </div>
    </section>
+   
+
+
+
+   <script>
+  
+         const plusPhoneBtn = document.getElementById("plus-btn-1");
+         plusPhoneBtn.addEventListener("click", function(){
+            var addedPhone = document.getElementById("added-phone").value++;
+            totalBilPrice = addedPhone * 1219 + 1219 ;
+
+            document.getElementById("totalMobilePrice").innerText = totalBilPrice ;
+           
+         })
+
+         const minusPhoneBtn = document.getElementById("minus-btn-1");
+         minusPhoneBtn.addEventListener("click", function(){
+            var removePhone = document.getElementById("added-phone").value--;
+            var addedPrice = document.getElementById("totalMobilePrice").innerText;
+            totalBilPrice = addedPrice-1219;
+            document.getElementById("totalMobilePrice").innerText = totalBilPrice ;
+
+         })
+
+
+
+         const plusCoverBtn = document.getElementById("plus-btn-2");
+         plusCoverBtn.addEventListener("click", function(){
+            var addedCover = document.getElementById("added-cover").value++;
+            netCoverPrice = addedCover * 59 + 59 ;
+
+            document.getElementById("totalCoverPrice").innerText = netCoverPrice ;
+           
+         })
+
+         const minusCoverBtn = document.getElementById("minus-btn-2");
+         minusCoverBtn.addEventListener("click", function(){
+            var removeCover = document.getElementById("added-cover").value--;
+            var addedCover = document.getElementById("totalCoverPrice").innerText;
+            netCoverPrice = addedCover-59;
+            document.getElementById("totalCoverPrice").innerText = netCoverPrice ;
+
+         })
+           const checkAmount  = document.getElementById("check-btn");
+           checkAmount.addEventListener("click", function(){
+
+            var phonePrice = document.getElementById("totalMobilePrice").innerText;
+            var phoneAmount = parseFloat(phonePrice);
+            var coverPrice = document.getElementById("totalCoverPrice").innerText;
+            var coverAmount = parseFloat(coverPrice);
+            var subAmount = phoneAmount + coverAmount;
+            document.getElementById("sub-amount").innerText = subAmount;
+
+            var govtTax = document.getElementById("sub-amount").innerText;
+            var taxAmount = parseFloat(govtTax)  /100 * 3 ;
+            taxAmount = taxAmount.toFixed(2);
+
+            document.getElementById("tax").innerText = taxAmount;
+
+            var totalPriceAmount = subAmount-taxAmount;
+            document.getElementById("total-amount").innerText = totalPriceAmount;
+
+
+
+           })
+
+
+   </script>
 </body>
 
 </html>
